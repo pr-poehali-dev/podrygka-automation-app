@@ -15,16 +15,16 @@
     --popover: 0 0% 100%;
     --popover-foreground: 0 0% 20%;
 
-    --primary: 340 82% 52%;
+    --primary: 262 83% 58%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 291 64% 42%;
+    --secondary: 280 70% 65%;
     --secondary-foreground: 0 0% 100%;
 
     --muted: 0 0% 96%;
     --muted-foreground: 0 0% 45%;
 
-    --accent: 340 82% 52%;
+    --accent: 270 80% 70%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84.2% 60.2%;
@@ -32,7 +32,7 @@
 
     --border: 0 0% 90%;
     --input: 0 0% 90%;
-    --ring: 340 82% 52%;
+    --ring: 262 83% 58%;
 
     --radius: 0.5rem;
 
@@ -109,5 +109,51 @@
   h5,
   h6 {
     font-family: "Montserrat", sans-serif;
+  }
+}
+
+@layer utilities {
+  .glass {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+  }
+
+  .glass-card {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 0 8px 32px 0 rgba(138, 43, 226, 0.1);
+  }
+
+  .glass-button {
+    background: linear-gradient(
+      135deg,
+      rgba(147, 51, 234, 0.9),
+      rgba(168, 85, 247, 0.9)
+    );
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 16px rgba(147, 51, 234, 0.3);
+  }
+
+  .glass-button:hover {
+    background: linear-gradient(
+      135deg,
+      rgba(126, 34, 206, 0.95),
+      rgba(147, 51, 234, 0.95)
+    );
+    box-shadow: 0 6px 20px rgba(147, 51, 234, 0.4);
+    transform: translateY(-1px);
+  }
+
+  .glass-header {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border-bottom: 1px solid rgba(147, 51, 234, 0.1);
   }
 }

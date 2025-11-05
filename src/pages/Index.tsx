@@ -60,8 +60,8 @@ const Index = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-pink-50 to-purple-50">
-      <header className="bg-white shadow-sm sticky top-0 z-10">
+    <div className="min-h-screen bg-gradient-to-br from-purple-100 via-purple-50 to-violet-100">
+      <header className="glass-header sticky top-0 z-10">
         <div className="max-w-md mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center gap-2">
             {currentProcess !== 'home' && (
@@ -73,7 +73,7 @@ const Index = () => {
                 <Icon name="ArrowLeft" size={20} />
               </Button>
             )}
-            <h1 className="text-xl font-bold text-primary">Подружка</h1>
+            <h1 className="text-2xl font-bold text-primary">Подружка</h1>
           </div>
           <Icon name="User" size={24} className="text-muted-foreground" />
         </div>
@@ -82,33 +82,35 @@ const Index = () => {
       <main className="max-w-md mx-auto px-4 py-6">
         {currentProcess === 'home' && (
           <div className="space-y-6 animate-fade-in">
-            <div className="text-center space-y-2">
-              <h2 className="text-2xl font-bold">Добро пожаловать!</h2>
-              <p className="text-muted-foreground">Выберите процесс для работы</p>
+            <div className="text-center space-y-3 mb-2">
+              <h2 className="text-3xl font-bold bg-gradient-to-r from-purple-600 to-violet-600 bg-clip-text text-transparent">Добро пожаловать!</h2>
+              <p className="text-muted-foreground text-lg">Выберите процесс для работы</p>
             </div>
 
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-2 gap-5">
               {processes.map((process) => (
                 <Card 
                   key={process.id}
-                  className="p-6 cursor-pointer hover:shadow-lg transition-all hover:scale-105"
+                  className="glass-card p-8 cursor-pointer hover:shadow-2xl transition-all duration-300 hover:scale-105 hover:-translate-y-1 active:scale-95"
                   onClick={() => setCurrentProcess(process.id)}
                 >
-                  <div className="space-y-3 text-center">
-                    <div className={`${process.color} w-16 h-16 rounded-2xl mx-auto flex items-center justify-center`}>
-                      <Icon name={process.icon as any} size={32} className="text-white" />
+                  <div className="space-y-4 text-center">
+                    <div className="w-20 h-20 rounded-3xl mx-auto flex items-center justify-center bg-gradient-to-br from-purple-500 to-violet-600 shadow-lg">
+                      <Icon name={process.icon as any} size={40} className="text-white" />
                     </div>
-                    <p className="font-semibold text-sm leading-tight">{process.name}</p>
+                    <p className="font-bold text-base leading-tight">{process.name}</p>
                   </div>
                 </Card>
               ))}
             </div>
 
-            <Card className="p-4 bg-primary/5 border-primary/20">
+            <Card className="glass-card p-5 border-purple-200">
               <div className="flex items-start gap-3">
-                <Icon name="Info" size={20} className="text-primary mt-0.5" />
+                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-purple-500 to-violet-600 flex items-center justify-center shrink-0">
+                  <Icon name="Info" size={20} className="text-white" />
+                </div>
                 <div className="space-y-1">
-                  <p className="font-medium text-sm">Совет дня</p>
+                  <p className="font-semibold text-base">Совет дня</p>
                   <p className="text-sm text-muted-foreground">
                     Сканируйте товары сразу при получении коробки для быстрой инвентаризации
                   </p>
@@ -121,60 +123,61 @@ const Index = () => {
         {currentProcess === 'scan' && (
           <div className="space-y-6 animate-fade-in">
             <div>
-              <h2 className="text-2xl font-bold mb-2">Сканирование товара</h2>
-              <p className="text-muted-foreground">Отсканируйте штрих-код товара</p>
+              <h2 className="text-3xl font-bold mb-2 bg-gradient-to-r from-purple-600 to-violet-600 bg-clip-text text-transparent">Сканирование товара</h2>
+              <p className="text-muted-foreground text-base">Отсканируйте штрих-код товара</p>
             </div>
 
             <div className="space-y-4">
-              <div className="flex gap-2">
+              <div className="flex gap-3">
                 <Input 
                   placeholder="Введите штрих-код"
                   value={scanInput}
                   onChange={(e) => setScanInput(e.target.value)}
                   onKeyPress={(e) => e.key === 'Enter' && handleScan()}
+                  className="glass-card h-14 text-base"
                 />
-                <Button onClick={handleScan} size="icon" className="shrink-0">
-                  <Icon name="Search" size={20} />
+                <Button onClick={handleScan} size="icon" className="glass-button shrink-0 h-14 w-14">
+                  <Icon name="Search" size={22} />
                 </Button>
               </div>
 
-              <Button variant="outline" className="w-full" size="lg">
-                <Icon name="Camera" size={20} className="mr-2" />
+              <Button className="glass-card w-full h-16 text-base font-semibold hover:shadow-xl transition-all" size="lg">
+                <Icon name="Camera" size={24} className="mr-2" />
                 Открыть камеру
               </Button>
             </div>
 
             {scannedProduct && (
-              <Card className="p-6 animate-scale-in">
-                <div className="space-y-4">
+              <Card className="glass-card p-8 animate-scale-in">
+                <div className="space-y-5">
                   <div className="flex items-start justify-between">
                     <div className="flex-1">
-                      <Badge className="mb-2">{scannedProduct.category}</Badge>
-                      <h3 className="font-bold text-lg">{scannedProduct.name}</h3>
-                      <p className="text-sm text-muted-foreground mt-1">
+                      <Badge className="mb-3 text-sm px-3 py-1">{scannedProduct.category}</Badge>
+                      <h3 className="font-bold text-xl mb-2">{scannedProduct.name}</h3>
+                      <p className="text-sm text-muted-foreground">
                         Артикул: {scannedProduct.barcode}
                       </p>
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-2 gap-4 pt-4 border-t">
-                    <div>
-                      <p className="text-sm text-muted-foreground mb-1">Цена</p>
-                      <p className="text-2xl font-bold text-primary">{scannedProduct.price} ₽</p>
+                  <div className="grid grid-cols-2 gap-5 pt-4 border-t border-purple-200">
+                    <div className="glass-card p-4 rounded-2xl">
+                      <p className="text-sm text-muted-foreground mb-2">Цена</p>
+                      <p className="text-3xl font-bold text-primary">{scannedProduct.price} ₽</p>
                     </div>
-                    <div>
-                      <p className="text-sm text-muted-foreground mb-1">Остаток</p>
-                      <p className="text-2xl font-bold">{scannedProduct.stock} шт</p>
+                    <div className="glass-card p-4 rounded-2xl">
+                      <p className="text-sm text-muted-foreground mb-2">Остаток</p>
+                      <p className="text-3xl font-bold">{scannedProduct.stock} шт</p>
                     </div>
                   </div>
 
-                  <div className="flex gap-2 pt-2">
-                    <Button className="flex-1">
-                      <Icon name="Plus" size={18} className="mr-2" />
+                  <div className="flex gap-3 pt-3">
+                    <Button className="glass-button flex-1 h-14 text-base font-semibold">
+                      <Icon name="Plus" size={20} className="mr-2" />
                       Добавить
                     </Button>
-                    <Button variant="outline" className="flex-1">
-                      <Icon name="Minus" size={18} className="mr-2" />
+                    <Button className="glass-card flex-1 h-14 text-base font-semibold hover:shadow-lg transition-all">
+                      <Icon name="Minus" size={20} className="mr-2" />
                       Списать
                     </Button>
                   </div>
@@ -187,35 +190,35 @@ const Index = () => {
         {currentProcess === 'inventory' && (
           <div className="space-y-6 animate-fade-in">
             <div>
-              <h2 className="text-2xl font-bold mb-2">Инвентаризация</h2>
-              <p className="text-muted-foreground">Учёт остатков товаров</p>
+              <h2 className="text-3xl font-bold mb-2 bg-gradient-to-r from-purple-600 to-violet-600 bg-clip-text text-transparent">Инвентаризация</h2>
+              <p className="text-muted-foreground text-base">Учёт остатков товаров</p>
             </div>
 
-            <Card className="p-6">
-              <div className="text-center space-y-4">
-                <div className="w-24 h-24 bg-secondary/10 rounded-full mx-auto flex items-center justify-center">
-                  <Icon name="ClipboardList" size={48} className="text-secondary" />
+            <Card className="glass-card p-8">
+              <div className="text-center space-y-5">
+                <div className="w-28 h-28 bg-gradient-to-br from-purple-500 to-violet-600 rounded-full mx-auto flex items-center justify-center shadow-lg">
+                  <Icon name="ClipboardList" size={56} className="text-white" />
                 </div>
                 <div>
-                  <p className="text-5xl font-bold mb-2">{inventoryCount}</p>
-                  <p className="text-muted-foreground">товаров проверено</p>
+                  <p className="text-6xl font-bold mb-3 bg-gradient-to-r from-purple-600 to-violet-600 bg-clip-text text-transparent">{inventoryCount}</p>
+                  <p className="text-muted-foreground text-lg">товаров проверено</p>
                 </div>
               </div>
             </Card>
 
-            <div className="space-y-3">
+            <div className="space-y-4">
               {mockProducts.map((product) => (
-                <Card key={product.id} className="p-4">
-                  <div className="flex items-center justify-between">
+                <Card key={product.id} className="glass-card p-5">
+                  <div className="flex items-center justify-between gap-4">
                     <div className="flex-1">
-                      <p className="font-semibold">{product.name}</p>
+                      <p className="font-bold text-base mb-1">{product.name}</p>
                       <p className="text-sm text-muted-foreground">Остаток: {product.stock} шт</p>
                     </div>
                     <Button 
-                      size="sm"
+                      className="glass-button h-12 px-5 font-semibold"
                       onClick={() => setInventoryCount(inventoryCount + 1)}
                     >
-                      <Icon name="Check" size={16} className="mr-1" />
+                      <Icon name="Check" size={18} className="mr-2" />
                       Проверено
                     </Button>
                   </div>
@@ -228,42 +231,42 @@ const Index = () => {
         {currentProcess === 'unbox' && (
           <div className="space-y-6 animate-fade-in">
             <div>
-              <h2 className="text-2xl font-bold mb-2">Разборка коробок</h2>
-              <p className="text-muted-foreground">Регистрация поступлений</p>
+              <h2 className="text-3xl font-bold mb-2 bg-gradient-to-r from-purple-600 to-violet-600 bg-clip-text text-transparent">Разборка коробок</h2>
+              <p className="text-muted-foreground text-base">Регистрация поступлений</p>
             </div>
 
-            <Card className="p-6 bg-gradient-to-br from-primary/5 to-secondary/5">
-              <div className="text-center space-y-4">
-                <div className="w-24 h-24 bg-primary rounded-full mx-auto flex items-center justify-center">
-                  <Icon name="Package" size={48} className="text-white" />
+            <Card className="glass-card p-8">
+              <div className="text-center space-y-5">
+                <div className="w-28 h-28 bg-gradient-to-br from-purple-500 to-violet-600 rounded-full mx-auto flex items-center justify-center shadow-lg">
+                  <Icon name="Package" size={56} className="text-white" />
                 </div>
                 <div>
-                  <p className="text-5xl font-bold mb-2">{boxCount}</p>
-                  <p className="text-muted-foreground">коробок разобрано сегодня</p>
+                  <p className="text-6xl font-bold mb-3 bg-gradient-to-r from-purple-600 to-violet-600 bg-clip-text text-transparent">{boxCount}</p>
+                  <p className="text-muted-foreground text-lg">коробок разобрано сегодня</p>
                 </div>
-                <Button size="lg" className="w-full" onClick={() => setBoxCount(boxCount + 1)}>
-                  <Icon name="Plus" size={20} className="mr-2" />
+                <Button className="glass-button w-full h-16 text-base font-semibold" onClick={() => setBoxCount(boxCount + 1)}>
+                  <Icon name="Plus" size={22} className="mr-2" />
                   Начать разборку новой коробки
                 </Button>
               </div>
             </Card>
 
-            <Card className="p-4">
-              <h3 className="font-semibold mb-3">Последние поступления</h3>
-              <div className="space-y-3">
-                <div className="flex justify-between items-center py-2 border-b last:border-0">
+            <Card className="glass-card p-6">
+              <h3 className="font-bold text-lg mb-4">Последние поступления</h3>
+              <div className="space-y-4">
+                <div className="flex justify-between items-center py-3 border-b border-purple-200 last:border-0">
                   <div>
-                    <p className="font-medium">Коробка #1234</p>
+                    <p className="font-semibold text-base">Коробка #1234</p>
                     <p className="text-sm text-muted-foreground">24 товара</p>
                   </div>
-                  <Badge variant="outline">Сегодня</Badge>
+                  <Badge className="text-sm px-3 py-1" variant="outline">Сегодня</Badge>
                 </div>
-                <div className="flex justify-between items-center py-2 border-b last:border-0">
+                <div className="flex justify-between items-center py-3 border-b border-purple-200 last:border-0">
                   <div>
-                    <p className="font-medium">Коробка #1233</p>
+                    <p className="font-semibold text-base">Коробка #1233</p>
                     <p className="text-sm text-muted-foreground">18 товаров</p>
                   </div>
-                  <Badge variant="outline">Вчера</Badge>
+                  <Badge className="text-sm px-3 py-1" variant="outline">Вчера</Badge>
                 </div>
               </div>
             </Card>
@@ -273,41 +276,43 @@ const Index = () => {
         {currentProcess === 'assemble' && (
           <div className="space-y-6 animate-fade-in">
             <div>
-              <h2 className="text-2xl font-bold mb-2">Сборка заказа</h2>
-              <p className="text-muted-foreground">Подготовка заказов к выдаче</p>
+              <h2 className="text-3xl font-bold mb-2 bg-gradient-to-r from-purple-600 to-violet-600 bg-clip-text text-transparent">Сборка заказа</h2>
+              <p className="text-muted-foreground text-base">Подготовка заказов к выдаче</p>
             </div>
 
             <Tabs defaultValue="pending" className="w-full">
-              <TabsList className="grid w-full grid-cols-2">
-                <TabsTrigger value="pending">Ожидают</TabsTrigger>
-                <TabsTrigger value="assembled">Собранные</TabsTrigger>
+              <TabsList className="glass-card grid w-full grid-cols-2 h-14">
+                <TabsTrigger value="pending" className="text-base font-semibold">Ожидают</TabsTrigger>
+                <TabsTrigger value="assembled" className="text-base font-semibold">Собранные</TabsTrigger>
               </TabsList>
-              <TabsContent value="pending" className="space-y-3 mt-4">
+              <TabsContent value="pending" className="space-y-4 mt-6">
                 {mockOrders.filter(o => o.status === 'pending').map((order) => (
-                  <Card key={order.id} className="p-4">
-                    <div className="flex items-center justify-between mb-3">
+                  <Card key={order.id} className="glass-card p-6">
+                    <div className="flex items-center justify-between mb-4">
                       <div>
-                        <p className="font-bold text-lg">{order.id}</p>
+                        <p className="font-bold text-xl mb-1">{order.id}</p>
                         <p className="text-sm text-muted-foreground">{order.customer}</p>
                       </div>
-                      <Badge className="bg-secondary">{order.items} товара</Badge>
+                      <Badge className="bg-gradient-to-r from-purple-500 to-violet-600 text-white text-sm px-3 py-2">{order.items} товара</Badge>
                     </div>
-                    <Button className="w-full">
-                      <Icon name="ShoppingCart" size={18} className="mr-2" />
+                    <Button className="glass-button w-full h-14 text-base font-semibold">
+                      <Icon name="ShoppingCart" size={20} className="mr-2" />
                       Начать сборку
                     </Button>
                   </Card>
                 ))}
               </TabsContent>
-              <TabsContent value="assembled" className="space-y-3 mt-4">
+              <TabsContent value="assembled" className="space-y-4 mt-6">
                 {mockOrders.filter(o => o.status === 'assembled').map((order) => (
-                  <Card key={order.id} className="p-4 border-green-200 bg-green-50">
+                  <Card key={order.id} className="glass-card p-6 border-2 border-green-300">
                     <div className="flex items-center justify-between">
                       <div>
-                        <p className="font-bold text-lg">{order.id}</p>
+                        <p className="font-bold text-xl mb-1">{order.id}</p>
                         <p className="text-sm text-muted-foreground">{order.customer}</p>
                       </div>
-                      <Icon name="CheckCircle" size={24} className="text-green-600" />
+                      <div className="w-14 h-14 rounded-full bg-green-500 flex items-center justify-center">
+                        <Icon name="CheckCircle" size={28} className="text-white" />
+                      </div>
                     </div>
                   </Card>
                 ))}
@@ -319,41 +324,41 @@ const Index = () => {
         {currentProcess === 'issue' && (
           <div className="space-y-6 animate-fade-in">
             <div>
-              <h2 className="text-2xl font-bold mb-2">Выдача заказа</h2>
-              <p className="text-muted-foreground">Передача заказа покупателю</p>
+              <h2 className="text-3xl font-bold mb-2 bg-gradient-to-r from-purple-600 to-violet-600 bg-clip-text text-transparent">Выдача заказа</h2>
+              <p className="text-muted-foreground text-base">Передача заказа покупателю</p>
             </div>
 
-            <Card className="p-6">
-              <div className="space-y-4">
-                <div className="text-center space-y-3">
-                  <div className="w-20 h-20 bg-primary rounded-full mx-auto flex items-center justify-center">
-                    <Icon name="QrCode" size={40} className="text-white" />
+            <Card className="glass-card p-8">
+              <div className="space-y-6">
+                <div className="text-center space-y-4">
+                  <div className="w-28 h-28 bg-gradient-to-br from-purple-500 to-violet-600 rounded-full mx-auto flex items-center justify-center shadow-lg">
+                    <Icon name="QrCode" size={56} className="text-white" />
                   </div>
-                  <p className="font-medium">Отсканируйте QR-код заказа</p>
+                  <p className="font-semibold text-lg">Отсканируйте QR-код заказа</p>
                 </div>
                 
-                <Input placeholder="Или введите номер заказа" />
+                <Input placeholder="Или введите номер заказа" className="glass-card h-14 text-base" />
                 
-                <Button className="w-full" size="lg">
-                  <Icon name="Search" size={20} className="mr-2" />
+                <Button className="glass-button w-full h-16 text-base font-semibold">
+                  <Icon name="Search" size={22} className="mr-2" />
                   Найти заказ
                 </Button>
               </div>
             </Card>
 
-            <div className="space-y-3">
-              <h3 className="font-semibold">Готовы к выдаче</h3>
+            <div className="space-y-4">
+              <h3 className="font-bold text-xl">Готовы к выдаче</h3>
               {mockOrders.filter(o => o.status === 'assembled').map((order) => (
-                <Card key={order.id} className="p-4">
-                  <div className="flex items-center justify-between mb-3">
+                <Card key={order.id} className="glass-card p-6">
+                  <div className="flex items-center justify-between mb-4">
                     <div>
-                      <p className="font-bold">{order.id}</p>
+                      <p className="font-bold text-lg">{order.id}</p>
                       <p className="text-sm text-muted-foreground">{order.customer}</p>
                     </div>
-                    <Badge>{order.items} товара</Badge>
+                    <Badge className="text-sm px-3 py-2">{order.items} товара</Badge>
                   </div>
-                  <Button className="w-full" variant="outline">
-                    <Icon name="CheckCircle" size={18} className="mr-2" />
+                  <Button className="glass-button w-full h-14 text-base font-semibold">
+                    <Icon name="CheckCircle" size={20} className="mr-2" />
                     Выдать заказ
                   </Button>
                 </Card>
