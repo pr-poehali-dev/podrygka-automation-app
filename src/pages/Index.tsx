@@ -62,31 +62,45 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-100 via-purple-50 to-violet-100">
       <header className="glass-header sticky top-0 z-10">
-        <div className="max-w-md mx-auto px-4 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            {currentProcess !== 'home' && (
-              <Button 
-                variant="ghost" 
-                size="icon"
-                onClick={() => setCurrentProcess('home')}
-              >
-                <Icon name="ArrowLeft" size={20} />
+        <div className="max-w-md mx-auto px-4 py-4">
+          <div className="flex items-center justify-between mb-3">
+            <div className="flex items-center gap-3">
+              {currentProcess !== 'home' && (
+                <Button 
+                  variant="ghost" 
+                  size="icon"
+                  onClick={() => setCurrentProcess('home')}
+                >
+                  <Icon name="ArrowLeft" size={22} />
+                </Button>
+              )}
+              <h1 className="text-2xl font-bold text-primary">Подружка</h1>
+            </div>
+            <div className="flex items-center gap-2">
+              <Button variant="ghost" size="icon">
+                <Icon name="Scan" size={22} className="text-primary" />
               </Button>
-            )}
-            <h1 className="text-2xl font-bold text-primary">Подружка</h1>
+              <Button variant="ghost" size="icon">
+                <Icon name="Bell" size={22} className="text-primary" />
+              </Button>
+              <Button variant="ghost" size="icon">
+                <Icon name="Settings" size={22} className="text-primary" />
+              </Button>
+            </div>
           </div>
-          <Icon name="User" size={24} className="text-muted-foreground" />
+          {currentProcess === 'home' && (
+            <div className="text-sm text-muted-foreground">
+              <div className="font-semibold mb-1">Магазин №140</div>
+              <div>Москва, Ленинская слобода, 19</div>
+              <div>8 (800) 707-47-47</div>
+            </div>
+          )}
         </div>
       </header>
 
       <main className="max-w-md mx-auto px-4 py-6">
         {currentProcess === 'home' && (
           <div className="space-y-6 animate-fade-in">
-            <div className="text-center space-y-3 mb-2">
-              <h2 className="text-3xl font-bold bg-gradient-to-r from-purple-600 to-violet-600 bg-clip-text text-transparent">Добро пожаловать!</h2>
-              <p className="text-muted-foreground text-lg">Выберите процесс для работы</p>
-            </div>
-
             <div className="grid grid-cols-2 gap-5">
               {processes.map((process) => (
                 <Card 
@@ -94,29 +108,15 @@ const Index = () => {
                   className="glass-card p-8 cursor-pointer hover:shadow-2xl transition-all duration-300 hover:scale-105 hover:-translate-y-1 active:scale-95"
                   onClick={() => setCurrentProcess(process.id)}
                 >
-                  <div className="space-y-4 text-center">
-                    <div className="w-20 h-20 rounded-3xl mx-auto flex items-center justify-center bg-gradient-to-br from-purple-500 to-violet-600 shadow-lg">
+                  <div className="flex flex-col items-center justify-center space-y-4 text-center min-h-[140px]">
+                    <div className="w-20 h-20 rounded-3xl flex items-center justify-center bg-gradient-to-br from-purple-500 to-violet-600 shadow-lg">
                       <Icon name={process.icon as any} size={40} className="text-white" />
                     </div>
-                    <p className="font-bold text-base leading-tight">{process.name}</p>
+                    <p className="font-bold text-base leading-tight px-2">{process.name}</p>
                   </div>
                 </Card>
               ))}
             </div>
-
-            <Card className="glass-card p-5 border-purple-200">
-              <div className="flex items-start gap-3">
-                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-purple-500 to-violet-600 flex items-center justify-center shrink-0">
-                  <Icon name="Info" size={20} className="text-white" />
-                </div>
-                <div className="space-y-1">
-                  <p className="font-semibold text-base">Совет дня</p>
-                  <p className="text-sm text-muted-foreground">
-                    Сканируйте товары сразу при получении коробки для быстрой инвентаризации
-                  </p>
-                </div>
-              </div>
-            </Card>
           </div>
         )}
 
