@@ -60,7 +60,7 @@ const Index = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-100 via-purple-50 to-violet-100">
+    <div className="min-h-screen bg-gradient-to-br from-purple-100 via-violet-50 to-pink-50" style={{backgroundImage: 'radial-gradient(circle at 20% 50%, rgba(168, 85, 247, 0.15), transparent 50%), radial-gradient(circle at 80% 80%, rgba(147, 51, 234, 0.15), transparent 50%)'}}>
       <header className="glass-header sticky top-0 z-10">
         <div className="max-w-md mx-auto px-4 py-4">
           <div className="flex items-center justify-between mb-3">
@@ -105,7 +105,7 @@ const Index = () => {
               {processes.map((process) => (
                 <Card 
                   key={process.id}
-                  className="glass-card p-8 cursor-pointer hover:shadow-2xl transition-all duration-300 hover:scale-105 hover:-translate-y-1 active:scale-95"
+                  className="glass-card p-8 cursor-pointer transition-all duration-300 hover:scale-[1.02] hover:-translate-y-2 active:scale-95 hover:shadow-[0_20px_60px_rgba(147,51,234,0.25)]"
                   onClick={() => setCurrentProcess(process.id)}
                 >
                   <div className="flex flex-col items-center justify-center space-y-4 text-center min-h-[140px]">
@@ -134,14 +134,14 @@ const Index = () => {
                   value={scanInput}
                   onChange={(e) => setScanInput(e.target.value)}
                   onKeyPress={(e) => e.key === 'Enter' && handleScan()}
-                  className="glass-card h-14 text-base"
+                  className="glass-input h-14 text-base border-0 focus:ring-0 focus-visible:ring-0"
                 />
                 <Button onClick={handleScan} size="icon" className="glass-button shrink-0 h-14 w-14">
                   <Icon name="Search" size={22} />
                 </Button>
               </div>
 
-              <Button className="glass-card w-full h-16 text-base font-semibold hover:shadow-xl transition-all" size="lg">
+              <Button className="glass-card w-full h-16 text-base font-semibold hover:shadow-[0_12px_40px_rgba(147,51,234,0.2)] hover:-translate-y-1 transition-all" size="lg">
                 <Icon name="Camera" size={24} className="mr-2" />
                 Открыть камеру
               </Button>
@@ -176,7 +176,7 @@ const Index = () => {
                       <Icon name="Plus" size={20} className="mr-2" />
                       Добавить
                     </Button>
-                    <Button className="glass-card flex-1 h-14 text-base font-semibold hover:shadow-lg transition-all">
+                    <Button className="glass-card flex-1 h-14 text-base font-semibold hover:shadow-[0_8px_30px_rgba(147,51,234,0.15)] hover:-translate-y-1 transition-all">
                       <Icon name="Minus" size={20} className="mr-2" />
                       Списать
                     </Button>
